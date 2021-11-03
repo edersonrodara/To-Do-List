@@ -22,25 +22,21 @@ const createUser = async (req, res) => {
   res.status(201).json({ user });
 };
 
-// const login = async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await userService.login({ email, password });
-  
-//   if (user.status) {
-//     return res.status(user.status).json({ message: user.message });
-//   }
-  
-//   // if (user === null) {
-//   //   return res.status(401).json({ message: 'Incorrect username or password' });
-//   // }
-  
-//   const { _id, role } = user;
-//   const payload = { _id, role, email };
-  
-//   const token = jwt.sign(payload, secret, jwtConfig);
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userService.login({ email, password });
 
-//   return res.status(200).json({ token });
-// };
+  if (user.status) {
+    return res.status(user.status).json({ message: user.message });
+  }
+  
+  const { _id } = user;
+  const payload = { _id };
+  
+  const token = jwt.sign(payload, secret, jwtConfig);
+
+  return res.status(200).json({ token });
+};
 
 module.exports = {
   createUser,
