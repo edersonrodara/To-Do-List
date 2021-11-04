@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-<form>
-  <input type="text" />
-  <button>Cadastrar</button>
-</form>
-
-class CadastrarTask extends Component {
-  render() {
-    return (
-      <form>
+const CadastrarTask = () => {
+  return (
+    <div className="card">
+      <h2>Nova task</h2>
+      <form action="">
         <input type="text" />
         <button>Cadastrar</button>
       </form>
-    );
-  }
+    </div>
+  );
 }
 
 export default CadastrarTask;
