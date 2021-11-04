@@ -2,8 +2,6 @@ const Joi = require('joi');
 const taskModel = require('../models/taskModel');
 const { ObjectId } = require('mongodb');
 
-const jwt = require('../auth/jwt');
-
 const PENDENTE = 'pendente';
 const ANDAMENTO = 'andamento';
 const PRONTO = 'pronto';
