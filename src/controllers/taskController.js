@@ -29,7 +29,9 @@ const updateTask = async (req, res) => {
 };
 
 const getAlltask = async (req, res) => {
-  const task = await taskService.getAlltask();
+  const { sort } = req.query;
+
+  const task = await taskService.getAlltask(sort);
 
   res.status(201).json(task);
 };

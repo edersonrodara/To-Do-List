@@ -33,8 +33,8 @@ const updateTask = async (idTask, status) => {
   return task;
 };
 
-const getAlltask = async () => {
-  const task = await taskModel.getAlltask();
+const getAlltask = async (query) => {
+  const task = await taskModel.getAlltask(query);
   return task;
 };
 

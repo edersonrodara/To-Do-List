@@ -31,11 +31,11 @@ const updateTask = async (idTask, status) => {
   return result.value;
 };
 
-const getAlltask = async () => {
+const getAlltask = async (sort) => {
   const tarefasList = await connection();
   const task = await tarefasList.collection('tasks');
 
-  const mySort = { task: 1 };
+  const mySort = { [sort]: 1, task: 1 };
 
   return await task.find().sort(mySort).toArray();
 };
