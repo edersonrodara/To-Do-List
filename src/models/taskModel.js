@@ -1,3 +1,4 @@
+const { query } = require('express');
 const connection = require('./connection');
 
 const createTask = async (userId, body) => {
@@ -5,7 +6,9 @@ const createTask = async (userId, body) => {
   const tarefasList = await connection();
   const user = await tarefasList.collection('tasks');
 
-  const { insertedId: _id } = await user.insertOne({ userId, task, status, assign });
+  const query = { userId, task, status, assign }
+
+  const { insertedId: _id } = await user.insertOne(query);
 
   return {
     _id,
@@ -15,6 +18,25 @@ const createTask = async (userId, body) => {
     assign,
   };
 };
+
+// const updateTask = async (idTask, body) => {
+//   const { task, status = null, assign = null } = body;
+//   const tarefasList = await connection();
+//   const user = await tarefasList.collection('tasks');
+
+//   const queryFind = { idTask };
+//   const queryUpdate = { task, status, assign };
+
+//   const { insertedId: _id } = await user.findOneAndUpdate(queryFind, queryUpdate );
+
+//   return {
+//     _id,
+//     userId,
+//     task,
+//     status,
+//     assign,
+//   };
+// };
 
 module.exports = {
   createTask,
