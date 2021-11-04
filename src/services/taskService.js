@@ -1,23 +1,45 @@
 const Joi = require('joi');
 const taskModel = require('../models/taskModel');
+const { ObjectId } = require('mongodb');
 
 const jwt = require('../auth/jwt');
 
-const createTask = async (body, token) => {
-  const { task } = body;
+const PENDENTE = 'pendente';
+const ANDAMENTO = 'andamento';
+const PRONTO = 'pronto';
+
+const createTask = async (task) => {
   const { error } = Joi.object({
     task: Joi.string().required(),
   }).validate({ task });
-  if (error) return { status: 400, message: error.details[0].message };
+  if (error) return { stats: 400, message: error.details[0].message };
 
-  const validToken = jwt.validateJwt(token);
-  if (validToken.isValid) return { status: 400, message: validToken.err }
-  const { conteudoToken: { userId } } = validToken;
+  return await taskModel.createTask(task);
+};
 
-  const user = await taskModel.createTask(userId, body);
-  return user;
+const updateTask = async (idTask, status) => {
+  if (!ObjectId.isValid(idTask)) return { stats: 400, message: 'Invalid ID' }
+
+  const { error } = Joi.object({
+    status: Joi.string().required(),
+  }).validate({ status });
+  if (error) return { stats: 400, message: error.details[0].message };
+
+  if (status !== PENDENTE && status !== ANDAMENTO && status !== PRONTO) {
+    return { stats: 400, message: 'Status deve ser: pendente, andamento ou pronto' };
+  }
+
+  const task = await taskModel.updateTask(idTask, status);
+  return task;
+};
+
+const getAlltask = async () => {
+  const task = await taskModel.getAlltask();
+  return task;
 };
 
 module.exports = {
   createTask,
+  updateTask,
+  getAlltask,
 };

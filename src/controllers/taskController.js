@@ -4,18 +4,38 @@ const taskService = require('../services/taskService');
 require('dotenv').config()
 
 const createTask = async (req, res) => {
-  const { body } = req;
-  const token = req.headers.authorization;
+  const { task } = req.body;
 
-  const user = await taskService.createTask(body, token);
+  const user = await taskService.createTask(task);
 
-  if (user.status) {
-    return res.status(user.status).json({ message: user.message });
+  if (user.stats) {
+    return res.status(user.stats).json({ message: user.message });
   }
   
   res.status(201).json(user);
 };
 
+const updateTask = async (req, res) => {
+  const { status } = req.body;
+  const { id } = req.params;
+
+  const task = await taskService.updateTask(idTask = id, status);
+
+  if (task.stats) {
+    return res.status(task.stats).json({ message: task.message });
+  }
+  
+  res.status(201).json(task);
+};
+
+const getAlltask = async (req, res) => {
+  const task = await taskService.getAlltask();
+
+  res.status(201).json(task);
+};
+
 module.exports = {
   createTask,
+  updateTask,
+  getAlltask,
 };
