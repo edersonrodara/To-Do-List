@@ -20,6 +20,8 @@ const updateTask = async (req, res) => {
 
   const task = await taskService.updateTask(idTask = id, status);
 
+  console.log(task);
+
   if (task.stats) {
     return res.status(task.stats).json({ message: task.message });
   }

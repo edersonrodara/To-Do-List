@@ -9,17 +9,22 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/task')
-      .then(({ data }) => {
-        console.log(data);
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:3000/task');
         setTasks(data);
-      })
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getUser();
     }, [])
 
   return (
     <div className="App">
       <CadastrarTask></CadastrarTask>
-      <div class="row">
+      <div className="row">
       {tasks.map((task) => <CardTask task={ task } key={ task._id }></CardTask>)}
       </div>
     </div>
