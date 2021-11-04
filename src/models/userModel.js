@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
 const findByEmail = async (email) => {
-  const Cookmaster = await connection();
-  const user = await Cookmaster.collection('users');
+  const tarefasList = await connection();
+  const user = await tarefasList.collection('users');
   
   const query = { email };
 
@@ -12,8 +12,8 @@ const findByEmail = async (email) => {
 };
 
 const createUser = async ({ name, email, password }) => {
-  const Cookmaster = await connection();
-  const user = await Cookmaster.collection('users');
+  const tarefasList = await connection();
+  const user = await tarefasList.collection('users');
 
   const { insertedId: _id } = await user.insertOne({ name, email, password, role: 'user' });
 
@@ -26,8 +26,8 @@ const createUser = async ({ name, email, password }) => {
 };
 
 const login = async ({ email, password }) => {
-  const Cookmaster = await connection();
-  const user = await Cookmaster.collection('users');
+  const tarefasList = await connection();
+  const user = await tarefasList.collection('users');
 
   const query = { email, password };
   const result = await user.findOne(query);

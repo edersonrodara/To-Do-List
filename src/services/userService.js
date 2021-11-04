@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const userModel = require('../models/userModel');
 
+const jwt = require('../auth/jwt');
+
 const createUser = async ({ name, email, password }) => {
   const { error } = Joi.object({
     name: Joi.string().required(),
@@ -23,11 +25,13 @@ const login = async ({ email, password }) => {
   }).validate({ email, password });
   if (error) return { status: 400, message: error.details[0].message };
 
-  const login = await userModel.login({ email, password });
+  const { _id } = await userModel.login({ email, password });
 
-  if (!login) return { status: 403, message: 'Incorrect email or password' };
+  if (!_id) return { status: 403, message: 'Incorrect email or password' };
 
-  return login;
+  const token = jwt.creatToken(userId = _id);
+
+  return token;
 };
 
 module.exports = {

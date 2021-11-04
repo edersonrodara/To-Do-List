@@ -30,12 +30,7 @@ const login = async (req, res) => {
     return res.status(user.status).json({ message: user.message });
   }
   
-  const { _id } = user;
-  const payload = { _id };
-  
-  const token = jwt.sign(payload, secret, jwtConfig);
-
-  return res.status(200).json({ token });
+  return res.status(200).json({ token: user });
 };
 
 module.exports = {
