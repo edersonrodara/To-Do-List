@@ -40,8 +40,20 @@ const getAlltask = async (sort) => {
   return await task.find().sort(mySort).toArray();
 };
 
+const deleteTask = async (idTask) => {
+  const tarefasList = await connection();
+  const task = await tarefasList.collection('tasks');
+
+  const filter = { _id: ObjectId(idTask) };
+
+  const result = await task.findOneAndDelete(filter);
+
+  return result;
+};
+
 module.exports = {
   createTask,
   updateTask,
   getAlltask,
+  deleteTask,
 };

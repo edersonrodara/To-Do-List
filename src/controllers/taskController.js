@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const taskService = require('../services/taskService');
 
 require('dotenv').config()
@@ -36,8 +35,17 @@ const getAlltask = async (req, res) => {
   res.status(201).json(task);
 };
 
+const deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  const task = await taskService.deleteTask(idTask = id);
+
+  res.status(201).json({ "task deletada": task });
+};
+
 module.exports = {
   createTask,
   updateTask,
   getAlltask,
+  deleteTask,
 };

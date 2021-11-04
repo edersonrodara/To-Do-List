@@ -38,8 +38,16 @@ const getAlltask = async (query) => {
   return task;
 };
 
+const deleteTask = async (idTask, status) => {
+  if (!ObjectId.isValid(idTask)) return { stats: 400, message: 'Invalid ID' }
+
+  const task = await taskModel.deleteTask(idTask, status);
+  return task.value;
+};
+
 module.exports = {
   createTask,
   updateTask,
   getAlltask,
+  deleteTask,
 };
