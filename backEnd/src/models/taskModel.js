@@ -19,14 +19,14 @@ const createTask = async (task) => {
   };
 };
 
-const updateTask = async (idTask, status) => {
+const updateTask = async (idTask, status, task) => {
   const tarefasList = await connection();
-  const task = await tarefasList.collection('tasks');
+  const updateTask = await tarefasList.collection('tasks');
 
   const filter = { _id: ObjectId(idTask) };
-  const update = { $set: { status } };
+  const update = { $set: { status, task } };
 
-  const result = await task.findOneAndUpdate(filter, update, {
+  const result = await updateTask.findOneAndUpdate(filter, update, {
     returnDocument: 'after'
   });
 

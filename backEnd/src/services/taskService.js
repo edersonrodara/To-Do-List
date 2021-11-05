@@ -15,7 +15,7 @@ const createTask = async (task) => {
   return await taskModel.createTask(task);
 };
 
-const updateTask = async (idTask, status) => {
+const updateTask = async (idTask, status, task) => {
   if (!ObjectId.isValid(idTask)) return { stats: 400, message: 'Invalid ID' }
 
   const { error } = Joi.object({
@@ -27,8 +27,8 @@ const updateTask = async (idTask, status) => {
     return { stats: 400, message: 'Status deve ser: pendente, andamento ou pronto' };
   }
 
-  const task = await taskModel.updateTask(idTask, status);
-  return task;
+  const updateTask = await taskModel.updateTask(idTask, status, task);
+  return updateTask;
 };
 
 const getAlltask = async (query) => {

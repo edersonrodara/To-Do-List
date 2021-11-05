@@ -5,8 +5,21 @@
   flex-direction: column;
 }
 
+.esconder {
+  display: none;
+}
+
+.aparecer {
+  display: block;
+}
+
 .App select {
   margin-left: 10px;
+}
+
+.lixeira {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .lixeira {

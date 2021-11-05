@@ -18,7 +18,7 @@ function App() {
           <SortCard></SortCard>
         </div>
         <div className="row">
-        {tasks.map((task) => <CardTask task={ task } key={ task._id }></CardTask>)}
+        {tasks.map((oneTask) => <CardTask oneTask={ oneTask } key={ oneTask._id }></CardTask>)}
         </div>
       </div>
   );

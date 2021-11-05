@@ -15,16 +15,16 @@ const createTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  const { status } = req.body;
+  const { status, task } = req.body;
   const { id } = req.params;
 
-  const task = await taskService.updateTask(idTask = id, status);
+  const updateTask = await taskService.updateTask(idTask = id, status, task);
 
-  if (task.stats) {
+  if (updateTask.stats) {
     return res.status(task.stats).json({ message: task.message });
   }
   
-  res.status(201).json(task);
+  res.status(201).json(updateTask);
 };
 
 const getAlltask = async (req, res) => {
