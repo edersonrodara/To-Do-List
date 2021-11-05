@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import AppContext from '../context/AppContext';
 
 const CardTask = ({ task }) => {
+  const { getTasks, setTask, setRefresh } = useContext(AppContext);
   const [status, setStatus] = useState(task.status);
 
   useEffect(() => {
@@ -13,7 +15,8 @@ const CardTask = ({ task }) => {
   }, [status, task])
 
   const deleteTask = async () => {
-    await axios.delete(`http://localhost:3000/task/${task._id}`)
+    await axios.delete(`http://localhost:3000/task/${task._id}`);
+    setRefresh("");
   }
 
   let color = 'red';
@@ -23,6 +26,14 @@ const CardTask = ({ task }) => {
   if (task.status === 'andamento') {
     color = 'blue'
   }
+  if (task.status === 'pendente') {
+    color = 'red'
+  }
+
+  const handleChange = ({ target }) => {
+    setStatus(target.value);
+    setRefresh("");
+  }
 
   return (
     <div className={`card ${color}`}>
@@ -30,7 +41,7 @@ const CardTask = ({ task }) => {
         <button onClick={ deleteTask }>Apagar</button>
       </div>
       <h2>{task.task}</h2>
-      <select value={status} onChange={({ target }) => setStatus(target.value)}>
+      <select value={status} onChange={ handleChange }>
         <option value="pendente">Pendente</option>
         <option value="andamento">Andamento</option>
         <option value="pronto">Pronto</option>
