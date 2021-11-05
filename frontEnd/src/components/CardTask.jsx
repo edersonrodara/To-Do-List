@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/AppContext';
+import { BsTrash } from 'react-icons/bs'
 
 const CardTask = ({ task }) => {
-  const { getTasks, setTask, setRefresh } = useContext(AppContext);
+  const { setRefresh } = useContext(AppContext);
   const [status, setStatus] = useState(task.status);
 
   useEffect(() => {
@@ -36,17 +37,20 @@ const CardTask = ({ task }) => {
   }
 
   return (
-    <div className={`card ${color}`}>
-      <div>
-        <button onClick={ deleteTask }>Apagar</button>
+    <div>
+      <div className={`card ${color}`}>
+        <h2>{task.task}</h2>
+        Status
+        <select value={status} onChange={ handleChange }> 
+          <option value="pendente">Pendente</option>
+          <option value="andamento">Andamento</option>
+          <option value="pronto">Pronto</option>
+        </select>
+        <p>{task.date}</p>
+      <div className="lixeira">
+          <button onClick={ deleteTask }><BsTrash /></button>
       </div>
-      <h2>{task.task}</h2>
-      <select value={status} onChange={ handleChange }>
-        <option value="pendente">Pendente</option>
-        <option value="andamento">Andamento</option>
-        <option value="pronto">Pronto</option>
-      </select>
-      <p>{task.date}</p>
+      </div>
     </div>
   );
 }

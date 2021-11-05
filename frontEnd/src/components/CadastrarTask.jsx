@@ -4,7 +4,6 @@ import AppContext from '../context/AppContext';
 
 const CadastrarTask = () => {
   const { task, setTask, setRefresh } = useContext(AppContext);
-  // const [task, setTask] = useState("");
 
   const cadastrarTask = async (event) => {
     event.preventDefault();
@@ -14,8 +13,8 @@ const CadastrarTask = () => {
   }
 
   return (
-    <div className="card">
-      <h2>Nova task</h2>
+    <div className="card cadastrar">
+      <h2>Nova Tarefa</h2>
       <form action="">
         <input value={ task } onChange={ ({ target }) => setTask(target.value) } type="text" />
         <button onClick={ cadastrarTask }>Cadastrar</button>

@@ -6,29 +6,17 @@ import CadastrarTask from './components/CadastrarTask';
 import CardTask from './components/CardTask';
 import { useContext } from 'react';
 import AppContext from './context/AppContext';
+import SortCard from './components/SortCard';
 
 function App() {
   const { tasks } = useContext(AppContext);
   
-  // const [tasks, setTasks] = useState([]);
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const { data } = await axios.get('http://localhost:3000/task');
-  //       setTasks(() => {
-  //         return data;
-  //       } );
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   getUser();
-  //   }, [])
-
   return (
       <div className="App">
-        <CadastrarTask></CadastrarTask>
+        <div className="nav">
+          <CadastrarTask></CadastrarTask>
+          <SortCard></SortCard>
+        </div>
         <div className="row">
         {tasks.map((task) => <CardTask task={ task } key={ task._id }></CardTask>)}
         </div>

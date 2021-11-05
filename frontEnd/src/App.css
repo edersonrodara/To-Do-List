@@ -1,8 +1,49 @@
 /* fonte do css https://programandosolucoes.dev.br/2021/06/22/card-html-css/ */
+.App {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.App select {
+  margin-left: 10px;
+}
+
+.lixeira {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lixeira button {
+  background: transparent;
+  border: 0;
+  display: flex;
+  font-size: 25px;
+  justify-content: flex-end;
+}
+
+.nav {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.cadastrar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.cadastrar input {
+  margin-left: 10px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -41,4 +82,8 @@
  
 .red {
   border-left: 13px solid #b3404a;
+}
+
+.sort h2 {
+  display: inline-block;
 }

@@ -5,7 +5,9 @@ const createTask = async (task) => {
   const tarefasList = await connection();
   const user = await tarefasList.collection('tasks');
 
-  const query = { task, status: 'pendente', date: Date() }
+  const date = new Date().toLocaleString();
+
+  const query = { task, status: 'pendente', date }
 
   const { insertedId: _id } = await user.insertOne(query);
 
